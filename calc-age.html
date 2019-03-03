@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>나이 계산 프로그램</title>
+</head>
+
+<body>
+<input type="text" id="txtfld_dob">
+<input type="button" value="Calc" id="btn_dob">
+
+<script>
+function intlAge(inputDob)
+{
+    var userYear = inputDob.substring(0,4);
+    var userMonth = parseInt(inputDob.substring(4,6), 10);
+    var userDay = parseInt(inputDob.substring(6,8), 10);
+
+    var userDob = new Date(userYear+"/"+userMonth+"/"+userDay);
+    var today = new Date();
+    var diffYears = today.getFullYear() - userDob.getFullYear();
+
+    userDob.setFullYear(today.getFullYear());
+
+    if (today < userDob)
+        diffYears--;
+
+    return diffYears;
+}
+function KoreanAge(inputDob)
+{
+    var year = parseInt(new Date().getFullYear());
+    var ck = parseInt(inputDob.substring(0, 4), 10);
+    return (year-ck)+1;
+}
+
+var btn_dob = document.getElementById("btn_dob");
+btn_dob.onclick = function() {
+    var myDob = document.getElementById("txtfld_dob").value;
+    document.writeln("만나이: "+intlAge(myDob)+"<br>");
+    document.writeln("한국나이: "+KoreanAge(myDob));
+}
+
+window.onload = function() {
+}
+</script>
+</body>
+</html>
